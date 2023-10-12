@@ -11,10 +11,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - es.trafyn.info
+        - es.hostname.com
       # secretName: es-tls
   rules:
-    - host: es.trafyn.info
+    - host: es.hostname.com
       http:
         paths:
           - path: /
