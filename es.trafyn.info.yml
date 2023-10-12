@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: es-ingress
+  namespace: elastic-system
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-ssl-verify: "false"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+  #   cert-manager.io/cluster-issuer: ninjacart-in-cluster-issuer
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - es.trafyn.info
+      # secretName: es-tls
+  rules:
+    - host: es.trafyn.info
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: elasticsearch-es-http
+                port:
+                  number: 9200
+
